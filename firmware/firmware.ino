@@ -27,11 +27,14 @@
 #include <power_mgt.h>
 
 CRGB leds[696];
-int colors[] = {0xFFFFFF, 0xFF0000, 0xFFFF00, 0x008000, 0x0000FF, 0x800080};
+int colors[] = {CRGB::White, CRGB::Red, CRGB::Green, CRGB::Purple, CRGB::Blue, CRGB::Yellow};
 int currColor = 0;
+const int limit = 1000;
+int cooldown;
 
 void setup() {
   Serial.begin(115200);
+  cooldown = limit;
   pinMode(2, INPUT_PULLUP);
   pinMode(3, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(2), change, FALLING);
@@ -48,6 +51,10 @@ void setup() {
 
 void loop() {
   char tmp[3];
+  if(cooldown > 0)
+  {
+    cooldown --;
+  }
   if(Serial.available())
   {
     Serial.readBytes(tmp,3);
@@ -56,16 +63,22 @@ void loop() {
 //      if(leds[val] == (CRGB)CRGB::White) leds[val] = CRGB::Black;
       //else 
       leds[val] = colors[currColor];
-      
-
     FastLED.show();
   }
 }
 
 void change()
 {
+  if(cooldown > 0)
+  {
+    return;
+  }
   currColor++;
   if(currColor > 6) currColor = 0;
+  if(cooldown == 0)
+  {
+    cooldown = limit;
+  }
 }
 
 void reset()
