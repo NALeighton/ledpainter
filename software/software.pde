@@ -108,7 +108,7 @@ void sendFill(float x, float y)
      y = y / unitSizeY;
      
      delay(100);
-    int i = int(y) * 24 + int(x);
+    int i = int(x) * 24 + (int(y)*-1);
       String s = str(i);
       if (s.length() == 1)
         s = "00" + s;
