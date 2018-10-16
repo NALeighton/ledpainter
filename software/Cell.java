@@ -1,5 +1,5 @@
 public class Cell{
-  
+
   private float xPos;
   private float yPos;
   private float unitSizeX;
@@ -7,7 +7,8 @@ public class Cell{
   private boolean active;
   private boolean changed;
   private int life;
-  
+
+  //Square displayed on the screen is a cell
   public Cell(float xPos, float yPos, float unitSizeX, float unitSizeY)
   {
     this.xPos = xPos;
@@ -18,12 +19,12 @@ public class Cell{
     changed = false;
     life = 0;
   }
-  
+
   public int getLife()
   {
     return life;
   }
-  
+
   public void tick()
   {
     if(life == 0 && active == false) return;
@@ -36,7 +37,7 @@ public class Cell{
       }
     }
   }
-  
+
   public void setState(boolean state)
   {
     active = state;
@@ -48,7 +49,7 @@ public class Cell{
       changed = true;
     }
   }
-  
+
   public void setChanged(boolean state)
   {
     changed = state;
@@ -57,15 +58,14 @@ public class Cell{
   {
     return changed;
   }
-  
+
   public boolean getState()
   {
     return active;
   }
-  
-  /*
-  boolean x is used to determin which axis you are questing the size of. True = X, False = Y
-  */
+
+  //boolean x is used to determin which axis you are questing the size of. True = X, False = Y
+
   public float getUnitSize(boolean x)
   {
     if(x)
@@ -77,7 +77,7 @@ public class Cell{
       return unitSizeY;
     }
   }
-  
+
   public float getPos(boolean x)
   {
     if(x)

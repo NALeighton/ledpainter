@@ -1,7 +1,8 @@
 public class GridManager{
-  
+
   Cell cells[];
-  
+
+  //Helper for managing all of the cells being displayed
   public GridManager(float unitSizeX, float unitSizeY)
   {
     cells = new Cell[696];
@@ -19,16 +20,15 @@ public class GridManager{
       cells[q].setState(false);
     }
   }
-  
+
   public void tick()
   {
     for(int i = 0; i < 696; i++)
     {
       cells[i].tick();
-      //System.out.println(cell.getLife());
     }
   }
-  
+
   public void updateGrid(float x, float y)
   {
     for(int i = 0; i < 696; i++)
@@ -39,7 +39,7 @@ public class GridManager{
       }
     }
   }
-  
+
   public Cell getCell(int i)
   {
     return cells[i];
